@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineWifi } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FaPlay } from "react-icons/fa";
+
+import { getPopularMovies } from "./../services/movieService";
 
 const Home = () => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchMyapi() {
+      let { data } = await getPopularMovies();
+      console.log("The data", data);
+      setMovies(data.results);
+    }
+
+    fetchMyapi();
+  }, []);
+
+  console.log("The movies", movies);
+
   return (
     <div className="p-3 flex flex-col gap-6 text-gray-200">
       {/* header */}
@@ -45,6 +63,35 @@ const Home = () => {
           </button>
         </div>
       </form>
+
+      {/* trending movies */}
+      <h2 className="text-xl font-semibold text-gray-100">Trending</h2>
+      <div className="w-full bg-red-400 h-60 rounded relative">
+        <img
+          src="https://image.tmdb.org/t/p/original/7ZO9yoEU2fAHKhmJWfAc2QIPWJg.jpg"
+          alt="trending"
+          className="w-full h-full object-cover rounded"
+        />
+
+        <div className="absolute top-0 bottom-0 bg-[rgba(0,0,0,0.4)] w-full h-full"></div>
+
+        <div className="absolute top-32 left-10 w-1/2  h-20">
+          <p className="font-bold text-3xl text-white">{movies[0]?.title}</p>
+          <p className="lg:mt-3">
+            {movies[0]?.release_date.split("-")[0] +
+              ` - ${movies[0]?.overview.substring(0, 70)}...`}
+          </p>
+        </div>
+
+        {/* button */}
+        <div className="mr-2 w-1/2 absolute top-40 -right-36 md:-right-52">
+          <button className="p-3 bg-blue-500 rounded-lg font-semibold flex gap-3 items-center justify-center">
+            {" "}
+            <FaPlay />
+            Watch Now
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
