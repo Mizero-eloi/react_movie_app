@@ -10,6 +10,7 @@ import RightSideBar from "./components/RightSideBar";
 
 function App() {
   const [count, setCount] = useState(0);
+  console.log(import.meta.env.VITE_PUBLIC_GOOGLE_API_TOKEN);
 
   return (
     <GoogleOAuthProvider
