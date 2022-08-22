@@ -20,7 +20,9 @@ const RightSideBar = () => {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <p>{userProfile?.userName}</p>
+            <p className="text-gray-200 capitalize font-semibold">
+              {userProfile?.userName}
+            </p>
           </div>
         ) : (
           <GoogleLogin

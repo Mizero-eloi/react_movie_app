@@ -17,7 +17,7 @@ function App() {
       clientId={import.meta.env.VITE_PUBLIC_GOOGLE_API_TOKEN}
     >
       <div className="flex gap-6">
-        <div className="lg:w-1/5">
+        <div className="lg:w-1/5 sticky top-0 h-[100vh]">
           <LeftSideBar />
         </div>
         <div className="w-full md:w-3/5">
@@ -26,7 +26,7 @@ function App() {
             <Route path="/home" element={<Home />} />
           </Routes>
         </div>
-        <div className="w-1/5 bg-violet-600 hidden md:block">
+        <div className="w-1/5 sticky top-0 h-[100vh] border-l border-gray-100 hidden md:block">
           <RightSideBar />
         </div>
       </div>
