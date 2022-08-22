@@ -9,25 +9,39 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { FaPlay } from "react-icons/fa";
 
-import { getPopularMovies } from "./../services/movieService";
+import {
+  getOnTheAirTv,
+  getPopularMovies,
+  getUpcomingMovies,
+} from "./../services/movieService";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [onTheAirTv, setOnTheAirTv] = useState([]);
+
   // const slides = [];
 
   useEffect(() => {
     async function fetchMyapi() {
       let { data } = await getPopularMovies();
       setMovies(data.results);
+      const upcomingMovies = await getUpcomingMovies();
+
+      const on_the_air = await getOnTheAirTv();
+      console.log("on_the_air", on_the_air);
+      setOnTheAirTv(on_the_air.data.results);
+
+      setUpcomingMovies(upcomingMovies.data.results);
     }
 
     fetchMyapi();
   }, []);
 
-  console.log("The movies", movies);
+  // console.log("The air", );
 
   return (
-    <div className="p-3 flex flex-col gap-6 text-gray-200">
+    <div className="p-3 flex flex-col gap-5 text-gray-200">
       {/* header */}
       <div className="flex justify-between">
         <div className="flex gap-4">
@@ -99,7 +113,7 @@ const Home = () => {
       {/* Popular movies */}
       <div>
         <h2 className="text-xl font-semibold text-gray-100 ">Popular</h2>
-        <div className="flex flex-wrap gap-4 pt-2">
+        <div className="flex flex-wrap gap-4 pt-2 mt-3">
           <Swiper
             modules={[Navigation]}
             spaceBetween={50}
@@ -119,6 +133,70 @@ const Home = () => {
                     />
                   </div>
                   <p className="text-center mt-1 font-medium">{m.title}</p>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+
+      {/* Upcoming  */}
+
+      <div>
+        <h2 className="text-xl font-semibold text-gray-100 ">Upcoming</h2>
+        <div className="flex flex-wrap gap-4 pt-2 mt-3">
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={50}
+            slidesPerView={3}
+            navigation
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {upcomingMovies.slice(0, 20).map((m) => (
+              <SwiperSlide>
+                <Link to={`/movies/${m.id}`} className="w-1/4">
+                  <div className="h-72 bg-red-500 mt-2 rounded-lg">
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
+                      alt="trending"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <p className="text-center mt-1 font-medium">{m.title}</p>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+
+      {/* On the air  */}
+
+      <div>
+        <h2 className="text-xl font-semibold text-gray-100 ">On The air </h2>
+        <div className="flex flex-wrap gap-4 pt-2 mt-3">
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={50}
+            slidesPerView={3}
+            navigation
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {onTheAirTv.slice(0, 20).map((m) => (
+              <SwiperSlide>
+                <Link to={`/movies/${m.id}`} className="w-1/4">
+                  <div className="h-72 bg-red-500 mt-2 rounded-lg">
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
+                      alt="trending"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <p className="text-center mt-1 font-medium">
+                    {m.original_name}
+                  </p>
                 </Link>
               </SwiperSlide>
             ))}

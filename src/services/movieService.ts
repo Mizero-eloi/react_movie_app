@@ -10,3 +10,21 @@ export const getPopularMovies = async () => {
   console.log("The response", response);
   return response;
 };
+
+export const getUpcomingMovies = async () => {
+  const response = await http.get(
+    `${env.VITE_MOVIE_APP_API_URL}movie/upcoming?api_key=${env.VITE_API_KEY}`
+  );
+
+  console.log("The response", response);
+  return response;
+};
+
+export const getOnTheAirTv = async () => {
+  const response = await http.get(
+    `${env.VITE_MOVIE_APP_API_URL}tv/on_the_air?api_key=${env.VITE_API_KEY}`
+  );
+
+  console.log("The response", response);
+  return response;
+};
