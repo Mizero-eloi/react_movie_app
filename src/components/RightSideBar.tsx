@@ -17,7 +17,7 @@ const RightSideBar = () => {
                 src={userProfile?.image}
                 alt="userProfile"
                 className="w-full h-full object-cover rounded-full"
-                referrerpolicy="no-referrer"
+                referrerPolicy="no-referrer"
               />
             </div>
             <p>{userProfile?.userName}</p>
@@ -25,7 +25,7 @@ const RightSideBar = () => {
         ) : (
           <GoogleLogin
             onSuccess={(response) => createOrGetUser(response, addUser)}
-            onError={(error) => console.log("Error", error)}
+            onError={() => console.log("Error")}
           />
         )}
       </div>
