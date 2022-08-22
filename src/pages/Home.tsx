@@ -3,18 +3,21 @@ import { Link } from "react-router-dom";
 import { AiOutlineWifi } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 import { FaPlay } from "react-icons/fa";
 
 import { getPopularMovies } from "./../services/movieService";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  // const slides = [];
 
   useEffect(() => {
     async function fetchMyapi() {
       let { data } = await getPopularMovies();
-      console.log("The data", data);
       setMovies(data.results);
     }
 
@@ -97,16 +100,29 @@ const Home = () => {
       <div>
         <h2 className="text-xl font-semibold text-gray-100 ">Popular</h2>
         <div className="flex flex-wrap gap-4 pt-2">
-          {movies.slice(0, 3).map((m) => (
-            <div className="w-1/4 h-64 bg-red-500 mt-2">
-              <img
-                src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
-                alt="trending"
-                className="w-full h-full object-cover rounded"
-              />
-              <p className="text-center">{m.title}</p>
-            </div>
-          ))}
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={50}
+            slidesPerView={3}
+            navigation
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {movies.slice(0, 20).map((m) => (
+              <SwiperSlide>
+                <Link to={`/movies/${m.id}`} className="w-1/4">
+                  <div className="h-72 bg-red-500 mt-2 rounded-lg">
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
+                      alt="trending"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <p className="text-center mt-1 font-medium">{m.title}</p>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </div>
