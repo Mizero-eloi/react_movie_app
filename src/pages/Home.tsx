@@ -84,12 +84,29 @@ const Home = () => {
         </div>
 
         {/* button */}
-        <div className="mr-2 w-1/2 absolute top-40 -right-36 md:-right-52">
-          <button className="p-3 bg-blue-500 rounded-lg font-semibold flex gap-3 items-center justify-center">
+        <div className="mr-2 w-1/2 relative -top-20 left-[45%] bg-red-500 ">
+          <button className="p-3 bg-blue-500 rounded-lg font-semibold flex gap-3 items-center justify-center float-right">
             {" "}
             <FaPlay />
             Watch Now
           </button>
+        </div>
+      </div>
+
+      {/* Popular movies */}
+      <div>
+        <h2 className="text-xl font-semibold text-gray-100 ">Popular</h2>
+        <div className="flex flex-wrap gap-4 pt-2">
+          {movies.slice(0, 3).map((m) => (
+            <div className="w-1/4 h-64 bg-red-500 mt-2">
+              <img
+                src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
+                alt="trending"
+                className="w-full h-full object-cover rounded"
+              />
+              <p className="text-center">{m.title}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
