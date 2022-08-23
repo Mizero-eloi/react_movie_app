@@ -55,3 +55,12 @@ export const getSimilarMovies = async (id: string) => {
   console.log("The response", response);
   return response;
 };
+
+export const getMovieVideos = async (id: string) => {
+  const response = await http.get(
+    `${env.VITE_MOVIE_APP_API_URL}movie/${id}/videos?api_key=${env.VITE_API_KEY}`
+  );
+
+  console.log("The response", response);
+  return response;
+};
