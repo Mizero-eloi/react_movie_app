@@ -15,7 +15,7 @@ import {
   getUpcomingMovies,
 } from "./../services/movieService";
 
-const Home = () => {
+const Home = ({ handleToggleRightSideBar, handleToggleLeftSideBar }) => {
   const [movies, setMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [onTheAirTv, setOnTheAirTv] = useState([]);
@@ -23,6 +23,8 @@ const Home = () => {
   // const slides = [];
 
   useEffect(() => {
+    handleToggleRightSideBar(true);
+    handleToggleLeftSideBar(true);
     async function fetchMyapi() {
       let { data } = await getPopularMovies();
       setMovies(data.results);
@@ -124,7 +126,7 @@ const Home = () => {
           >
             {movies.slice(0, 20).map((m) => (
               <SwiperSlide>
-                <Link to={`/movies/${m.id}`} className="w-1/4">
+                <Link to={`/movie/${m.id}`} className="w-1/4">
                   <div className="h-72 bg-red-500 mt-2 rounded-lg">
                     <img
                       src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
@@ -155,7 +157,7 @@ const Home = () => {
           >
             {upcomingMovies.slice(0, 20).map((m) => (
               <SwiperSlide>
-                <Link to={`/movies/${m.id}`} className="w-1/4">
+                <Link to={`/movie/${m.id}`} className="w-1/4">
                   <div className="h-72 bg-red-500 mt-2 rounded-lg">
                     <img
                       src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
@@ -186,7 +188,7 @@ const Home = () => {
           >
             {onTheAirTv.slice(0, 20).map((m) => (
               <SwiperSlide>
-                <Link to={`/movies/${m.id}`} className="w-1/4">
+                <Link to={`/movie/${m.id}`} className="w-1/4">
                   <div className="h-72 bg-red-500 mt-2 rounded-lg">
                     <img
                       src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
