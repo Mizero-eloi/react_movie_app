@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getMovieDetails, getSimilarMovies } from "./../services/movieService";
+import {
+  getMovieDetails,
+  getMovieVideos,
+  getSimilarMovies,
+} from "./../services/movieService";
 import { Link, useLocation } from "react-router-dom";
 import { AiFillStar, AiOutlineConsoleSql } from "react-icons/ai";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
+import { IMovie, IMVideo } from "./../types.d";
 
 interface IProps {
   handleToggleRightSideBar: (v: boolean) => void;
@@ -14,8 +19,9 @@ const MovieDetails = ({
   handleToggleRightSideBar,
   handleToggleLeftSideBar,
 }: IProps) => {
-  const [movie, setMovie] = useState({});
-  const [similarMovies, setSimilarMovies] = useState([]);
+  const [movie, setMovie] = useState<IMovie>({});
+  const [similarMovies, setSimilarMovies] = useState<IMovie[]>([]);
+  const [movieVideo, setMovieVideo] = useState<IMVideo[]>([]);
 
   const location = useLocation();
   const parameters = location.pathname.split("/");
@@ -31,16 +37,43 @@ const MovieDetails = ({
       setMovie(data);
       const result = await getSimilarMovies(movieId);
       setSimilarMovies(result.data.results);
+
+      const videos = await getMovieVideos(movieId);
+      setMovieVideo(videos.data.results);
     }
 
     fetchMyapi();
   }, [movieId]);
 
-  console.log("movie detials", movie);
+  console.log("movie vid", movie);
 
   return (
     <div className="p-3 md:w-[90%]">
-      <div className="w-full h-[500px] bg-green-400 rounded"></div>
+      <div className="w-full h-[500px] bg-green-400 rounded">
+        {/* <video
+          //   src={`https://www.youtube.com/watch?v=${movieVideo[0]?.key}`}
+          src="https://youtu.be/emded/ZuDIXV94Z1w"
+          controls
+          loop
+          className="w-full h-full"
+        >
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/watch?v=${movieVideo[0]?.key}`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></iframe>
+        </video> */}
+        <iframe
+          src={`https://www.youtube.com/embed/${movieVideo[0]?.key}`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full"
+        ></iframe>
+      </div>
 
       {/* movie details & similar movies container  */}
       <div className="flex flex-col gap-6">
