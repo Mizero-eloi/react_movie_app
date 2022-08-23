@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { AiFillStar } from "react-icons/ai";
+
 import useAuthStore from "../store/authStore";
 import { createOrGetUser } from "./../services/userService";
+import { getTopRated } from "../services/movieService";
 
 const RightSideBar = () => {
   const { userProfile, addUser } = useAuthStore();
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchMyapi() {
+      let { data } = await getTopRated();
+      setTopRatedMovies(data.results);
+    }
+
+    fetchMyapi();
+  }, []);
 
   return (
     <div>
@@ -30,6 +43,31 @@ const RightSideBar = () => {
             onError={() => console.log("Error")}
           />
         )}
+      </div>
+      {/* top rated movies */}
+      <div className="p-4 text-gray-200">
+        <h2 className="text-xl">Top rated</h2>
+        <div className="mt-2 flex flex-col gap-6 h-[638px] overflow-y-scroll noScrollbar">
+          {topRatedMovies.slice(0, 4).map((m) => (
+            <div className="flex gap-3">
+              <img
+                src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
+                alt={m.title}
+                className="w-1/2 h-40 rounded-lg"
+              />
+              <div className="w-1/2 flex flex-col gap-4">
+                <h2 className="text-sm font-semibold">{m.title}</h2>
+                <p className="text-xs text-gray-300">
+                  {m.overview.substring(0, 40) + "..."}
+                </p>
+                <div className="w-20  border border-blue-400 rounded-full flex gap-3 justify-center items-center">
+                  {m.vote_average}
+                  <AiFillStar />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
