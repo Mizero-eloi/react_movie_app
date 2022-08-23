@@ -15,7 +15,15 @@ import {
   getUpcomingMovies,
 } from "./../services/movieService";
 
-const Home = ({ handleToggleRightSideBar, handleToggleLeftSideBar }) => {
+interface IProps {
+  handleToggleRightSideBar: (v: boolean) => void;
+  handleToggleLeftSideBar: (v: boolean) => void;
+}
+
+const Home = ({
+  handleToggleRightSideBar,
+  handleToggleLeftSideBar,
+}: IProps) => {
   const [movies, setMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [onTheAirTv, setOnTheAirTv] = useState([]);

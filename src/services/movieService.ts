@@ -37,3 +37,21 @@ export const getTopRated = async () => {
   console.log("The response", response);
   return response;
 };
+
+export const getMovieDetails = async (id: string) => {
+  const response = await http.get(
+    `${env.VITE_MOVIE_APP_API_URL}movie/${id}?api_key=${env.VITE_API_KEY}`
+  );
+
+  console.log("The response", response);
+  return response;
+};
+
+export const getSimilarMovies = async (id: string) => {
+  const response = await http.get(
+    `${env.VITE_MOVIE_APP_API_URL}movie/${id}/similar?api_key=${env.VITE_API_KEY}`
+  );
+
+  console.log("The response", response);
+  return response;
+};
