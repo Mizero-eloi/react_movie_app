@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import RightSideBar from "./components/RightSideBar";
 import MovieDetails from "./pages/MovieDetails";
+import Search from "./pages/search";
 
 function App() {
   const [showRightSidebar, setShowRightSidebar] = useState(true);
@@ -59,6 +60,15 @@ function App() {
               path="/movie/:id"
               element={
                 <MovieDetails
+                  handleToggleRightSideBar={handleToggleRightSideBar}
+                  handleToggleLeftSideBar={handleToggleLeftSideBar}
+                />
+              }
+            />
+            <Route
+              path="/search/:searchTerm"
+              element={
+                <Search
                   handleToggleRightSideBar={handleToggleRightSideBar}
                   handleToggleLeftSideBar={handleToggleLeftSideBar}
                 />

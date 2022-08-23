@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineWifi } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
@@ -28,6 +28,15 @@ const Home = ({
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [upcomingMovies, setUpcomingMovies] = useState<IMovie[]>([]);
   const [onTheAirTv, setOnTheAirTv] = useState<ITv[]>([]);
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (search.trim() !== "") {
+      navigate("/search/" + search);
+    }
+  };
 
   // const slides = [];
 
@@ -78,15 +87,21 @@ const Home = ({
       </div>
 
       {/* search bar  */}
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSearch}>
         <div className="relative mt-5 bg-gray-700 rounded">
           <input
             type="text"
+            value={search}
             className="p-3 text-gray-200 w-[90%] rounded  outline-none bg-gray-700"
             placeholder="Search"
-            onChange={() => {}}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
           />
-          <button className="absolute right-4 top-4 text-lg" onClick={() => {}}>
+          <button
+            className="absolute right-4 top-4 text-lg"
+            onClick={handleSearch}
+          >
             <BsSearch />
           </button>
         </div>

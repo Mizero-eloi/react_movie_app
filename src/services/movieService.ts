@@ -64,3 +64,12 @@ export const getMovieVideos = async (id: string) => {
   console.log("The response", response);
   return response;
 };
+
+export const getSearchedMovie = async (searchTerm: string) => {
+  const response = await http.get(
+    `${env.VITE_MOVIE_APP_API_URL}search/movie/?query=${searchTerm}&api_key=${env.VITE_API_KEY}`
+  );
+
+  console.log("The response", response);
+  return response;
+};
