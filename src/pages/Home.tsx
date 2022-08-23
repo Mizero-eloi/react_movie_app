@@ -14,6 +14,7 @@ import {
   getPopularMovies,
   getUpcomingMovies,
 } from "./../services/movieService";
+import { IMovie, ITv } from "../types";
 
 interface IProps {
   handleToggleRightSideBar: (v: boolean) => void;
@@ -24,9 +25,9 @@ const Home = ({
   handleToggleRightSideBar,
   handleToggleLeftSideBar,
 }: IProps) => {
-  const [movies, setMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [onTheAirTv, setOnTheAirTv] = useState([]);
+  const [movies, setMovies] = useState<IMovie[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<IMovie[]>([]);
+  const [onTheAirTv, setOnTheAirTv] = useState<ITv[]>([]);
 
   // const slides = [];
 
@@ -48,7 +49,7 @@ const Home = ({
     fetchMyapi();
   }, []);
 
-  // console.log("The air", );
+  console.log("The air", onTheAirTv);
 
   return (
     <div className="p-3 flex flex-col gap-5 text-gray-200">

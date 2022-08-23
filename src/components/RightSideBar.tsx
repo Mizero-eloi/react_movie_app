@@ -5,10 +5,12 @@ import { AiFillStar } from "react-icons/ai";
 import useAuthStore from "../store/authStore";
 import { createOrGetUser } from "./../services/userService";
 import { getTopRated } from "../services/movieService";
+import { IMovie } from "../types";
 
 const RightSideBar = () => {
-  const { userProfile, addUser } = useAuthStore();
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const { userProfile } = useAuthStore();
+  const { addUser } = useAuthStore();
+  const [topRatedMovies, setTopRatedMovies] = useState<IMovie[]>([]);
 
   useEffect(() => {
     async function fetchMyapi() {
