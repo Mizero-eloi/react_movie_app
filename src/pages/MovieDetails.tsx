@@ -29,8 +29,8 @@ const MovieDetails = ({
   console.log("movieId", movieId);
 
   useEffect(() => {
-    handleToggleRightSideBar(false);
-    handleToggleLeftSideBar(false);
+    handleToggleRightSideBar(true);
+    handleToggleLeftSideBar(true);
 
     async function fetchMyapi() {
       let { data } = await getMovieDetails(movieId);
@@ -48,24 +48,8 @@ const MovieDetails = ({
   console.log("movie vid", movie);
 
   return (
-    <div className="p-3 md:w-[90%]">
+    <div className="p-3">
       <div className="w-full h-[500px] bg-green-400 rounded">
-        {/* <video
-          //   src={`https://www.youtube.com/watch?v=${movieVideo[0]?.key}`}
-          src="https://youtu.be/emded/ZuDIXV94Z1w"
-          controls
-          loop
-          className="w-full h-full"
-        >
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/watch?v=${movieVideo[0]?.key}`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe>
-        </video> */}
         <iframe
           src={`https://www.youtube.com/embed/${movieVideo[0]?.key}`}
           frameBorder="0"

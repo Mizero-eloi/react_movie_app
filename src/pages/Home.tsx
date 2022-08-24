@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineWifi } from "react-icons/ai";
+import { AiFillStar, AiOutlineWifi } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { Navigation } from "swiper";
@@ -15,6 +15,7 @@ import {
   getUpcomingMovies,
 } from "./../services/movieService";
 import { IMovie, ITv } from "../types";
+import ImageCard from "../components/ImageCard";
 
 interface IProps {
   handleToggleRightSideBar: (v: boolean) => void;
@@ -105,8 +106,8 @@ const Home = ({
       </form>
 
       {/* trending movies */}
-      <h2 className="text-xl font-semibold text-gray-100">Trending</h2>
-      <div className="w-full bg-red-400 h-60 rounded relative">
+      <h2 className="text-xl font-medium text-gray-100">Trending</h2>
+      <div className="w-full bg-red-400 h-72 rounded relative">
         <img
           src="https://image.tmdb.org/t/p/original/7ZO9yoEU2fAHKhmJWfAc2QIPWJg.jpg"
           alt="trending"
@@ -115,8 +116,8 @@ const Home = ({
 
         <div className="absolute top-0 bottom-0 bg-[rgba(0,0,0,0.4)] w-full h-full"></div>
 
-        <div className="absolute top-32 left-10 w-1/2  h-20">
-          <p className="font-bold text-3xl text-white">{movies[0]?.title}</p>
+        <div className="absolute top-24 left-10 w-1/2  h-20">
+          <p className="font-medium text-3xl text-white">{movies[0]?.title}</p>
           <p className="lg:mt-3">
             {movies[0]?.release_date.split("-")[0] +
               ` - ${movies[0]?.overview.substring(0, 70)}...`}
@@ -125,7 +126,7 @@ const Home = ({
 
         {/* button */}
         <div className="mr-2 w-1/2 relative -top-20 left-[45%] bg-red-500 ">
-          <button className="p-3 bg-blue-500 rounded-lg font-semibold flex gap-3 items-center justify-center float-right">
+          <button className="p-3 bg-blue-500 rounded-lg font-medium flex gap-3 items-center justify-center float-right">
             {" "}
             <FaPlay />
             Watch Now
@@ -135,7 +136,7 @@ const Home = ({
 
       {/* Popular movies */}
       <div>
-        <h2 className="text-xl font-semibold text-gray-100 ">Popular</h2>
+        <h2 className="text-xl font-medium text-gray-100 ">Popular</h2>
         <div className="flex flex-wrap gap-4 pt-2 mt-3">
           <Swiper
             modules={[Navigation]}
@@ -147,7 +148,8 @@ const Home = ({
           >
             {movies.slice(0, 20).map((m) => (
               <SwiperSlide>
-                <Link to={`/movie/${m.id}`} className="w-1/4">
+                <ImageCard m={m} />
+                {/* <Link to={`/movie/${m.id}`} className="w-1/4 relative">
                   <div className="h-72 bg-red-500 mt-2 rounded-lg">
                     <img
                       src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
@@ -155,8 +157,14 @@ const Home = ({
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
+                  <div className="bg-[rgba(0,0,0,0.5)] absolute w-full h-72 top-2">
+                    <div className="flex justify-center items-center  border border-blue-400 rounded-full hover:bg-blue-400 hover:text-gray-300 cursor-pointer mt-3 text-gray-200 w-1/4 relative left-44">
+                      <AiFillStar />
+                      <p className="ml-2">{m.vote_average}</p>
+                    </div>
+                  </div>
                   <p className="text-center mt-1 font-medium">{m.title}</p>
-                </Link>
+                </Link> */}
               </SwiperSlide>
             ))}
           </Swiper>
@@ -166,7 +174,7 @@ const Home = ({
       {/* Upcoming  */}
 
       <div>
-        <h2 className="text-xl font-semibold text-gray-100 ">Upcoming</h2>
+        <h2 className="text-xl font-medium text-gray-100 ">Upcoming</h2>
         <div className="flex flex-wrap gap-4 pt-2 mt-3">
           <Swiper
             modules={[Navigation]}
@@ -178,7 +186,8 @@ const Home = ({
           >
             {upcomingMovies.slice(0, 20).map((m) => (
               <SwiperSlide>
-                <Link to={`/movie/${m.id}`} className="w-1/4">
+                <ImageCard m={m} />
+                {/* <Link to={`/movie/${m.id}`} className="w-1/4">
                   <div className="h-72 bg-red-500 mt-2 rounded-lg">
                     <img
                       src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
@@ -187,7 +196,7 @@ const Home = ({
                     />
                   </div>
                   <p className="text-center mt-1 font-medium">{m.title}</p>
-                </Link>
+                </Link> */}
               </SwiperSlide>
             ))}
           </Swiper>
@@ -197,7 +206,7 @@ const Home = ({
       {/* On the air  */}
 
       <div>
-        <h2 className="text-xl font-semibold text-gray-100 ">On The air </h2>
+        <h2 className="text-xl font-medium text-gray-100 ">On The air </h2>
         <div className="flex flex-wrap gap-4 pt-2 mt-3">
           <Swiper
             modules={[Navigation]}
@@ -209,7 +218,8 @@ const Home = ({
           >
             {onTheAirTv.slice(0, 20).map((m) => (
               <SwiperSlide>
-                <Link to={`/movie/${m.id}`} className="w-1/4">
+                <ImageCard m={m} />
+                {/* <Link to={`/movie/${m.id}`} className="w-1/4">
                   <div className="h-72 bg-red-500 mt-2 rounded-lg">
                     <img
                       src={`https://image.tmdb.org/t/p/original${m.poster_path}`}
@@ -220,7 +230,7 @@ const Home = ({
                   <p className="text-center mt-1 font-medium">
                     {m.original_name}
                   </p>
-                </Link>
+                </Link> */}
               </SwiperSlide>
             ))}
           </Swiper>

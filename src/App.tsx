@@ -84,10 +84,20 @@ function App() {
                 />
               }
             />
+
+            <Route
+              path="/discover"
+              element={
+                <Discover
+                  handleToggleRightSideBar={handleToggleRightSideBar}
+                  handleToggleLeftSideBar={handleToggleLeftSideBar}
+                />
+              }
+            />
           </Routes>
         </div>
         {showRightSidebar && (
-          <div className="w-1/5 sticky top-0 h-[100vh] border-l border-gray-100 hidden md:block">
+          <div className="w-1/5 sticky top-0 h-[100vh] border-l border-gray-700 hidden md:block">
             <RightSideBar />
           </div>
         )}
