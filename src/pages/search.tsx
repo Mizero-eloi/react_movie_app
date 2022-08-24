@@ -29,10 +29,10 @@ const Search = ({
   const searchTerm = parameters[parameters.length - 1];
 
   const [search, setSearch] = useState(searchTerm);
-  const [searchResults, setSearchResults] = useState<IMovie[]>([]);
+  const [searchResults, setSearchResults] = useState<any>([]);
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     navigate("/search/" + search);
   };
@@ -161,7 +161,7 @@ const Search = ({
           </h2>
           {searchResults.length ? (
             <div className="mt-3 text-gray-200 flex gap-6 flex-wrap">
-              {searchResults.map((m) => (
+              {searchResults.map((m: any) => (
                 <Link to={`/movie/${m.id}`} className="w-[30.5%] md:w-[20%]">
                   <div className="h-72  bg-red-500 mt-2 rounded-lg">
                     <img
