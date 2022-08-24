@@ -8,6 +8,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import RightSideBar from "./components/RightSideBar";
 import MovieDetails from "./pages/MovieDetails";
+import Search from "./pages/search";
+import Discover from "./pages/Discover";
 
 function App() {
   const [showRightSidebar, setShowRightSidebar] = useState(true);
@@ -64,10 +66,38 @@ function App() {
                 />
               }
             />
+            <Route
+              path="/search/:searchTerm"
+              element={
+                <Search
+                  handleToggleRightSideBar={handleToggleRightSideBar}
+                  handleToggleLeftSideBar={handleToggleLeftSideBar}
+                />
+              }
+            />
+            <Route
+              path="/discover/:searchTerm"
+              element={
+                <Discover
+                  handleToggleRightSideBar={handleToggleRightSideBar}
+                  handleToggleLeftSideBar={handleToggleLeftSideBar}
+                />
+              }
+            />
+
+            <Route
+              path="/discover"
+              element={
+                <Discover
+                  handleToggleRightSideBar={handleToggleRightSideBar}
+                  handleToggleLeftSideBar={handleToggleLeftSideBar}
+                />
+              }
+            />
           </Routes>
         </div>
         {showRightSidebar && (
-          <div className="w-1/5 sticky top-0 h-[100vh] border-l border-gray-100 hidden md:block">
+          <div className="w-1/5 sticky top-0 h-[100vh] border-l border-gray-700 hidden md:block">
             <RightSideBar />
           </div>
         )}
