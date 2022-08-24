@@ -80,3 +80,8 @@ export interface ITv {
   vote_average: number;
   vote_count: number;
 }
+
+export interface IGenre {
+  id: string;
+  name: string;
+}

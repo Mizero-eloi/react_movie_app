@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import RightSideBar from "./components/RightSideBar";
 import MovieDetails from "./pages/MovieDetails";
 import Search from "./pages/search";
+import Discover from "./pages/Discover";
 
 function App() {
   const [showRightSidebar, setShowRightSidebar] = useState(true);
@@ -69,6 +70,15 @@ function App() {
               path="/search/:searchTerm"
               element={
                 <Search
+                  handleToggleRightSideBar={handleToggleRightSideBar}
+                  handleToggleLeftSideBar={handleToggleLeftSideBar}
+                />
+              }
+            />
+            <Route
+              path="/discover/:searchTerm"
+              element={
+                <Discover
                   handleToggleRightSideBar={handleToggleRightSideBar}
                   handleToggleLeftSideBar={handleToggleLeftSideBar}
                 />

@@ -64,14 +64,11 @@ const Home = ({
     <div className="p-3 flex flex-col gap-5 text-gray-200">
       {/* header */}
       <div className="flex justify-between">
-        <div className="flex gap-4">
-          <Link to="/movies">
+        <div className="flex gap-4 relative top-4">
+          <Link to="/discover/movies">
             <p>Movies</p>
           </Link>
-          <Link to="/series">
-            <p>Series</p>
-          </Link>
-          <Link to="/Tv_shows">
+          <Link to="/discover/Tv_shows">
             <p>Tv shows</p>
           </Link>
         </div>
