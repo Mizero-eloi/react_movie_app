@@ -3,7 +3,7 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { IMovie } from "../types";
 
-const ImageCard = ({ m }) => {
+const ImageCard = ({ m }: {m: any}) => {
   return (
     <Link to={`/movie/${m.id}`} className="w-1/4 relative">
       <div className="h-72 bg-red-500 mt-2 rounded-lg">

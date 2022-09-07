@@ -4,19 +4,19 @@ import { toast } from "react-toastify";
 
 // const TOKEN_KEY = config.tokenKey;
 // axios.defaults.headers.common["x-auth-token"] = localStorage.getItem(TOKEN_KEY);
-axios.interceptors.response.use(null, (error) => {
-  const expectedError =
-    error.response &&
-    error.response.status >= 400 &&
-    error.response.status < 500;
+// axios.interceptors.response.use(null, (error) => {
+//   const expectedError =
+//     error.response &&
+//     error.response.status >= 400 &&
+//     error.response.status < 500;
 
-  if (!expectedError) {
-    console.log("The error occured", error);
-    toast.error("Unexpected error occured !");
-  }
+//   if (!expectedError) {
+//     console.log("The error occured", error);
+//     toast.error("Unexpected error occured !");
+//   }
 
-  return Promise.reject(error);
-});
+//   return Promise.reject(error);
+// });
 
 export default {
   get: axios.get,

@@ -14,6 +14,7 @@ const LeftSideBar = ({ showLeftSidebar }: IProps) => {
   const term = parameters[parameters.length - 1];
   console.log("Current location", location);
   console.log("showLeftSidebar in component", showLeftSidebar);
+  console.log("Term", term);
   const [showSideBar, setShowSideBar] = useState(true);
   return (
     <div className="border-r border-gray-700 text-gray-300 pl-2 h-full">

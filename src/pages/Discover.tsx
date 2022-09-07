@@ -20,9 +20,9 @@ const Discover = ({
   handleToggleRightSideBar,
   handleToggleLeftSideBar,
 }: IProps) => {
-  const [activeGenre, setActiveGenre] = useState<IGenre>({});
+  const [activeGenre, setActiveGenre] = useState<any>({});
   const [genres, setGenres] = useState<IGenre[]>([]);
-  const [movieList, setMovieList] = useState<IMovie[]>([]);
+  const [movieList, setMovieList] = useState<any>([]);
 
   const location = useLocation();
   const parameters = location.pathname.split("/");
@@ -107,7 +107,7 @@ const Discover = ({
           </h2>
           {movieList.length ? (
             <div className="mt-3 text-gray-200 flex gap-6 flex-wrap">
-              {movieList.map((m) => (
+              {movieList.map((m: any) => (
                 <Link to={`/movie/${m.id}`} className="w-[30.5%] md:w-[20%]">
                   <div className="h-72  bg-red-500 mt-2 rounded-lg">
                     <img
