@@ -19,7 +19,7 @@ const MovieDetails = ({
   handleToggleRightSideBar,
   handleToggleLeftSideBar,
 }: IProps) => {
-  const [movie, setMovie] = useState<IMovie>({});
+  const [movie, setMovie] = useState<any>({});
   const [similarMovies, setSimilarMovies] = useState<IMovie[]>([]);
   const [movieVideo, setMovieVideo] = useState<IMVideo[]>([]);
 
@@ -74,7 +74,7 @@ const MovieDetails = ({
               <p className="text-gray-200 text-xl font-medium">{movie.title}</p>
               {/* genres */}
               <div className="flex gap-4 ">
-                {movie.genres?.map((genre) => (
+                {movie.genres?.map((genre: any) => (
                   <div className="flex justify-center items-center border border-blue-400 rounded-full p-3 hover:bg-blue-400 hover:text-gray-300 cursor-pointer">
                     <p className="text-xs text-gray-300">{genre.name}</p>
                   </div>

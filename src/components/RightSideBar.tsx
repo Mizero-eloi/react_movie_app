@@ -9,7 +9,7 @@ import { IMovie } from "../types";
 import { Link } from "react-router-dom";
 
 const RightSideBar = () => {
-  const { userProfile } = useAuthStore();
+  const { userProfile }: any = useAuthStore();
   const { addUser } = useAuthStore();
   const [topRatedMovies, setTopRatedMovies] = useState<IMovie[]>([]);
 

@@ -32,7 +32,7 @@ const Home = ({
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: any) => {
     e.preventDefault();
     if (search.trim() !== "") {
       navigate("/search/" + search);
